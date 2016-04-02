@@ -19,10 +19,10 @@
 	"npc_dota_hero_axe_template"
 	{
 		"override_hero"				"npc_dota_hero_axe"			// Hero to override
-		"Ability1"					"squire_rush"							// Ability 1
-		"Ability2"					"squire_focus_lua"
-		"Ability3"					"squire_stone_throw"
-		"Ability4"					"squire_focus"
+		"Ability1"					"squire_focus_datadriven"							// Ability 1
+		"Ability2"					""
+		"Ability3"					""
+		"Ability4"					""
 		
 		"VisionNighttimeRange"		"1800"										// Range of vision at night time.
 	}
