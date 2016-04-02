@@ -2,7 +2,7 @@
 // <key>	<value>
 // Hero		currently on/off, will be # of instances (-1 = infinite)
 //
-
+lolololol
 "CustomHeroList"
 {
 	"npc_dota_hero_abaddon"				"0"
