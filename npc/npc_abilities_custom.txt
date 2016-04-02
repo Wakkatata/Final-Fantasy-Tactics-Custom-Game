@@ -1,0 +1,80 @@
+// Dota Heroes File
+"DOTAAbilities"
+{
+	"Version"		"1"
+
+	//-------------------------
+	// SQUIRE : Focus
+	//-------------------------
+	"squire_focus_datadriven"
+	{
+		"BaseClass"				"ability_datadriven"
+		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityTextureName"	"alchemist_chemical_rage"
+		
+		"AbilityCastPoint"		"0"
+		
+		"AbilityCooldown"		"0"
+		
+		"AbilityManaCost"		"1"
+		
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"		"FIELD_INTEGER"
+				"squire_focus_damage_stack"	"1 2 3 4"
+			}
+			"02"
+			{
+				"var_type"		"FIELD_INTEGER"
+				"stack_value"	"1"
+			}
+		}
+		
+		"OnOwnerDied"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"squire_focus.lua"
+				"Function"		"DissipateEnergy"
+				"modifier"		"modifier_squire_focus_datadriven"
+			}
+		}
+		
+		"Modifiers"
+		{
+			"modifier_energy_salve"
+			{
+				"Attribute"		"MODIFIER_ATTRIBUTE_PERMANENT"
+				"Passive"				"1"
+				"IsHidden"				"1"
+				
+				"OnAbilityExecuted"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"squire_focus.lua"
+						"Function"		"BuffUp"
+						"modifier"		"modifier_squire_focus_datadriven"
+					}
+				}
+			}
+			
+			"modifier_squire_focus_datadriven"
+			{
+				"Attribute"		"MODIFIER_ATTRIBUTE_MULITPLE | MODIFIER_ATTRIBUTE_PERMANENT"
+				"IsPurgable"	"0"
+				"IsBuff"		"1"	
+				"Passive"		"1"
+				
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE" "%stack_value"
+				}
+			}
+		}
+	}
+
+	
+}
