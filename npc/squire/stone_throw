@@ -44,7 +44,7 @@
 		}
 	
 	
-				
+		//Where the Magic Happens
 		"OnProjectileHitUnit"
 		{
 			"Stun"
@@ -75,6 +75,7 @@
 				
 		"Modifiers"
 		{
+			//Actual buff
 			"modifier_squire_stone_throw_datadriven"
 			{
 				"Passive"		"1"
@@ -102,6 +103,7 @@
 				
 			}
 			
+			//Cooldown Modifier for Stone Throw, re applies buff once duration is over
 			"modifier_squire_stone_throw_cooldown"
 			{
 				"Duration"				"%cooldown"
@@ -118,6 +120,7 @@
 				}
 			}
 			
+			//Enemy slow Debuff
 			"modifier_squire_stone_throw_slow"
 			{
 				"IsDebuff"		"1"
