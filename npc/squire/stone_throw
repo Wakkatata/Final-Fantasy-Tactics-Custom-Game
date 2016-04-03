@@ -1,0 +1,132 @@
+//--------------------
+	// Squire: Stone Throw
+	//--------------------
+	"squire_stone_throw_datadriven"
+	{
+		"BaseClass"				"ability_datadriven"
+		"AbilityTextureName"	"brewmaster_earth_hurl_boulder"
+		
+		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_"
+		"AbilityUnitTargetTeam"	"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"	"DOTA_UNIT_TARGET_ALL"
+		"AbilityUnitDamageType"	"DAMAGE_TYPE_PHYSICAL"
+		"SpellImmunityType"		"SPELL_IMMUNITY_ENEMIES_YES"
+		
+		"AbilityCooldown"		"11.0 9.0 7.0 5.0"
+		
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"		"FIELD_INTEGER"
+				"bonus_range"	"550"
+			}
+			"02"
+			{
+				"var_type"		"FIELD_INTEGER"
+				"speed_modifier" "-15 -25 -35 -45"
+			}
+			"03"
+			{
+				"var_type"		"FIELD_FLOAT"
+				"duration"		"1.0 2.0 3.0 4.0"
+			}
+			"04"
+			{
+				"var_type"		"FIELD_FLOAT"
+				"cooldown"		"11.0 9.0 7.0 5.0"
+			}
+		}
+		
+		"precache"
+		{
+			"particle" "particles/units/heroes/hero_enchantress/enchantress_impetus.vpcf"
+		}
+	
+	
+				
+		"OnProjectileHitUnit"
+		{
+			"Stun"
+			{
+				"Target"	"TARGET"
+				"Duration"	"0.1"
+			}
+		
+			"ApplyModifier"
+			{
+				"ModifierName"	"modifier_squire_stone_throw_slow"
+				"Target"		"TARGET"
+			}
+			
+			"ApplyModifier"
+			{
+				"ModifierName"	"modifier_squire_stone_throw_cooldown"
+				"Target"		"CASTER"
+			}
+			
+			"RunScript"
+			{
+				"ScriptFile"	"squire_stone_throw.lua"
+				"Function"		"ThrowStone"
+				"modifier"		"modifier_squire_stone_throw_datadriven"
+			}
+		}
+				
+		"Modifiers"
+		{
+			"modifier_squire_stone_throw_datadriven"
+			{
+				"Passive"		"1"
+				"IsPurgable"	"0"	
+				"IsHidden"		"1"
+				
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_ATTACK_RANGE_BONUS"	"%bonus_range"
+				}
+				
+				"OnAttack"
+				{
+					"TrackingProjectile"
+					{
+						"Target"	"TARGET"
+						"EffectName" "particles/units/heroes/hero_enchantress/enchantress_impetus.vpcf"
+						"Dodgeable" "1"
+						"ProvidesVision" "1"
+						"VisionRadius" "300"
+						"MoveSpeed" "1500"
+						"SourceAttachment" "DOTA_PROJECTILE_ATTACHMENT_ATTACK_1"
+					}
+				}
+				
+			}
+			
+			"modifier_squire_stone_throw_cooldown"
+			{
+				"Duration"				"%cooldown"
+				"IsPurgable"			"0"
+				"IsHidden"				"1"
+				
+				"OnDestroy"
+				{
+					"ApplyModifier"
+					{
+						"ModifierName"	"modifier_squire_stone_throw_datadriven"
+						"Target"		"CASTER"
+					}
+				}
+			}
+			
+			"modifier_squire_stone_throw_slow"
+			{
+				"IsDebuff"		"1"
+				"Duration"		"%duration"
+				
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE"	"%speed_modifier"
+				}
+			}
+		}
+	}
