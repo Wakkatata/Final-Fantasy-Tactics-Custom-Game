@@ -1,0 +1,79 @@
+//--------------------
+	// Squire: Onion Knight
+	//--------------------
+	"squire_onion_knight_datadriven"
+	{
+		"BaseClass"				"ability_datadriven"
+		"AbilityTextureName"	"sven_gods_strength"
+		
+		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		
+		"AbilityCooldown"		"80.0 70.0 60.0"
+		
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"		"FIELD_INTEGER"
+				"buff_duration"	"20 30 40"
+			}
+			"02"
+			{
+				"var_type"		"FIELD_INTEGER"
+				"speed_modifier" "15 20 25"
+			}
+			"03"
+			{
+				"var_type"		"FIELD_INTEGER"
+				"cleave_amount"	"50 75 100"
+			}
+			"04"
+			{
+				"var_type"		"FIELD_INTEGER"
+				"cleave_radius"	"350"
+			}
+			"05"
+			{
+				"var_type"		"FIELD_INTEGER"
+				"cleave_angle"	"135"
+			}
+		}	
+		
+		"OnSpellStart"
+		{
+			"ApplyModifier"	
+			{
+				"ModifierName"	"squire_onion_knight_datadriven_modifier"
+				"Target"		"CASTER"
+			}
+		}
+		
+		"Modifiers"
+		{
+			"squire_onion_knight_datadriven_modifier"
+			{
+				"Duration" 	"%buff_duration"
+				"IsPurgable" "0"
+				"IsBuff"	"1"
+					
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE" "%speed_modifier"
+					"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT" "%speed_modifier"
+				}
+					
+				"States"
+				{
+					"MODIFIER_STATE_SILENCED"	"MODIFIER_STATE_VALUE_ENABLED"
+				}
+				"OnAttackLanded"
+				{
+					"CleaveAttack"
+					{
+						"CleavePercent"	"%cleave_amount"
+						"CleaveRadius"	"%cleave_radius"
+					}
+				}
+			}
+		}
+	}
