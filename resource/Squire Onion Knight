@@ -1,0 +1,7 @@
+    "DOTA_Tooltip_Ability_squire_onion_knight_datadriven"	"Job Class: Onion Knight"
+		"DOTA_Tooltip_Ability_squire_onion_knight_datadriven_description"	"The squire pursues the path of the Onion Knight, increasing his combat statistics substantially but prevents him from using abilities. Increases movement and attackspeed and grants a cleave attack, while being silenced for the duration."
+		"DOTA_Tooltip_Ability_squire_onion_knight_datadriven_speed_modifier"	"SPEED INCREASE: "
+		"DOTA_Tooltip_Ability_squire_onion_knight_datadriven_cleave_amount"		"CLEAVE AMOUNT: "
+		"DOTA_Tooltip_Ability_squire_onion_knight_datadriven_cleave_radius"		"CLEAVE RADIUS: "
+		"DOTA_Tooltip_Ability_squire_onion_knight_datadriven_buff_duration"		"DURATION: "
+		"DOTA_Tooltip_squire_onion_knight_datadriven_modifier"					"Strength of the Onion Knight"
