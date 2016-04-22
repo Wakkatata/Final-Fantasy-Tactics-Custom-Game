@@ -1,0 +1,201 @@
+<!---     Character Creator Assistant: --->
+                                                                
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>The HTML5 Herald</title>
+  <meta name="description" content="The HTML5 Herald">
+  <meta name="author" content="SitePoint">
+
+  <link rel="stylesheet" href="css/styles.css?v=1.0">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+</head>
+
+<body>
+
+	Name:<br><!--character name-->
+	<input type="text" id="name"><br>
+	Class:<br><!-- character class -->
+	<select id="class"> 
+		<option value="Barbarian"/> Barbarian
+		<option value="Bard"/> Bard
+		<option value="Cleric"/> Cleric
+		<option value="Druid"/> Druid
+		<option value="Fighter"/> Fighter
+		<option value="Monk"/> Monk
+		<option value="Paladin"/> Paladin
+		<option value="Ranger"/> Ranger
+		<option value="Rogue"/> Rogue
+		<option value="Sorcerer"/> Sorcerer
+		<option value="Warlock"/> Warlock
+		<option value="Wizard"/> Wizard
+	</select><br>
+	Race:<br><!-- character race-->
+	<select id="race">
+		<option value="Dwarf"/> Dwarf
+		<option value="Elf"/> Elf
+		<option value="Halfling"/> Halfling
+		<option value="Human"/> Human
+		<option value="Dragonborn"/> Dragonborn
+		<option value="Gnome"/> Gnome
+		<option value="Half-Elf"/> Half-Elf
+		<option value="Half-Orc"/> Half-Orc
+		<option value="Tiefling"/> Tiefling
+	</select><br>
+	Level:<input type="text" id="level" size="1"><!--character level-->
+	
+	<!--character stat-scores and proficiencies-->
+	<h3>Score<br></h3> <button type="button" onclick="scoreDieRoll()">Roll Score</button> <p id="scoreRollBar"></p><br> <!--special dice roller for stat scores-->
+	<input type="text" id="strengthBar" size="1"> Strength <button id="strBtn" onclick="setMod(this)" value="strength">Set Modifier</button> Mod: <label id="strMod"></label><br>
+	Athletics <input type="text" id="athleticsBar" size="1"> <input type="checkbox" id="athleticsPro" onclick="proficiency(this);" value='athleticsBar'><br>
+	<br>
+	<input type="text" id="dexterityBar" size="1"> Dexterity <button id="dexBtn" onclick="setMod(this)" value="dexterity">Set Modifier</button> Mod: <label id="dexMod"></label><br>
+	Acrobatics <input type="text" id="acrobaticsBar" size="1"> <input type="checkbox" id="acrobaticsPro" onclick="proficiency(this);" value="acrobaticsBar"><br>
+	Stealth <input type="text" id="stealthBar" size="1"> <input type="checkbox" id="stealthPro" onclick="proficiency(this)" value="stealthBar"><br>
+	Sleight of Hand <input type="text" id="sleightOfHandBar" size="1"> <input type="checkbox" id="sleightOfHandPro" onclick="proficiency(this);" value="sleightOfHandBar"><br>
+	<br>
+	<input type="text" id="constitutionBar" size="1"> Constitution <button id="conBtn" onclick="setMod(this)" value="constitution">Set Modifier</button> Mod: <label id="conMod"></label>
+	<br><br>
+	<input type="text" id="intelligenceBar" size="1"> Intelligence <button id="intBtn" onclick="setMod(this)" value="intelligence">Set Modifier</button> Mod: <label id="intMod"></label><br>
+	Arcana <input type="text" id="arcanaBar" size="1"> <input type="checkbox" onclick="proficiency(this)" id="arcanaPro" value="arcanaBar"><br>
+	Nature <input type="text" id="natureBar" size="1"> <input type="checkbox" onclick="proficiency(this)" id="naturePro" value="natureBar"><br>
+	History <input type="text" id="historyBar" size="1"> <input type="checkbox" onclick="proficiency(this)" id="historyPro" value="historyBar"><br>
+	Religion <input type="text" id="religionBar" size="1"> <input type="checkbox" onclick="proficiency(this)" id="religionPro" value="religionBar"><br>
+	Investigation <input type="text" id="investigationBar" size="1"> <input type="checkbox" onclick="proficiency(this)" id="investigationPro" value="investigationBar"><br>
+	<br>
+	<input type="text" id="wisdomBar" size="1"> Wisdom <button id="wisBtn" onclick="setMod(this)" value="wisdom">Set Modifier</button> Mod: <label id="wisMod"></label><br>
+	Animal Handling <input type="text" id="animalHandlingBar" size="1"> <input type="checkbox" onclick="proficiency(this)" id="animalHandlingPro" value="animalHandlingBar"><br>
+	Perception <input type="text" id="perceptionBar" size="1"> <input type="checkbox" onclick="proficiency(this)" id="perceptionPro" value="perceptionBar"><br>
+	Insight <input type="text" id="insightBar" size="1"> <input type="checkbox" onclick="proficiency(this)" id="insightPro" value="insightBar"><br>
+	Survival <input type="text" id="survivalBar" size="1"> <input type="checkbox" onclick="proficiency(this)" id="survivalPro" value="survivalBar"><br>
+	Medicine <input type="text" id="medicineBar" size="1"> <input type="checkbox" onclick="proficiency(this)" id="medicinePro" value="medicineBar"><br>
+	<br>
+	<input type="text" id="charismaBar" size="1"> Charisma <button id="chaBtn" onclick="setMod(this)" value="charisma">Set Modifier</button> Mod: <label id="chaMod"></label><br>
+	Deception <input type="text" id="deceptionBar" size="1"> <input type="checkbox" onclick="proficiency(this)" id="deceptionPro"value="deceptionBar"><br>
+	Performance <input type="text" id="performanceBar" size="1"> <input type="checkbox" onclick="proficiency(this)" id="performancePro" value="performanceBar"><br>
+	Intimidation <input type="text=" id="intimidationBar" size="1"> <input type="checkbox" onclick="proficiency(this)" id="intimidationPro" value="intimidationBar"><br>
+	Persuasion <input type="text" id="persuasionBar" size="1"> <input type="checkbox" onclick="proficiency(this)" id="persuasionPro" value="persuasionBar"><br>
+	<br>
+	
+	<!-- dice roller-->
+	Number of dice: <input type="text" id="noOfDieBar" size="1"> Type of Dice <input type="text" id="typeOfDieBar" size="1"> <button type="button" onclick="dieRolls()">Roll</button> <br>
+	Result: <p id="resultP"> </p> Total: <p id="totalP"> </p>
+		
+ <script>
+	
+	function calcMod(score){ <!-- calculates the modifier of the base score-->
+		return Math.floor((score-10)/2);
+	}
+	
+	function calcProf(level){ <!-- calculates the bonus proficiency of skills-->
+		return Math.floor((level/5) + 2);
+	}
+	
+	function setMod(stat){ <!-- sets the modifiers for the stats and skills-->
+		var bonus_prof = calcProf(document.getElementById("level").value);
+		
+		if(stat.value === "strength")
+		{
+			mod = calcMod(document.getElementById("strengthBar").value);
+			document.getElementById("strMod").innerHTML = mod;
+			document.getElementById('athleticsBar').value = document.getElementById('athleticsPro').checked ? mod + bonus_prof : mod; 
+			
+		}
+		if(stat.value === "dexterity")
+		{
+			mod = calcMod(document.getElementById("dexterityBar").value);
+			document.getElementById("dexMod").innerHTML = mod;
+			document.getElementById('acrobaticsBar').value = document.getElementById('acrobaticsPro').checked ? mod + bonus_prof : mod; 
+			document.getElementById('stealthBar').value = document.getElementById('stealthPro').checked ? mod + bonus_prof : mod;
+			document.getElementById('sleightOfHandBar').value = document.getElementById('sleightOfHandPro').checked ? mod + bonus_prof : mod;
+		}
+		if(stat.value === "constitution")
+		{
+			mod = calcMod(document.getElementById("constitutionBar").value);
+			document.getElementById("conMod").innerHTML = mod;
+		}
+		if(stat.value === "intelligence")
+		{
+			mod = calcMod(document.getElementById("intelligenceBar").value);
+			document.getElementById("intMod").innerHTML = mod;
+			document.getElementById('arcanaBar').value = document.getElementById('arcanaPro').checked ? mod + bonus_prof : mod; 
+			document.getElementById('natureBar').value = document.getElementById('naturePro').checked ? mod + bonus_prof : mod;
+			document.getElementById('historyBar').value = document.getElementById('historyPro').checked ? mod + bonus_prof : mod;
+			document.getElementById('religionBar').value = document.getElementById('religionPro').checked ? mod + bonus_prof : mod;
+			document.getElementById('investigationBar').value = document.getElementById('investigationPro').checked ? mod + bonus_prof : mod;
+		}
+		if(stat.value === "wisdom")
+		{
+			mod = calcMod(document.getElementById("wisdomBar").value);
+			document.getElementById("wisMod").innerHTML = mod;
+			document.getElementById('animalHandlingBar').value = document.getElementById('animalHandlingPro').checked ? mod + bonus_prof : mod; 
+			document.getElementById('perceptionBar').value = document.getElementById('perceptionPro').checked ? mod + bonus_prof : mod; 
+			document.getElementById('insightBar').value = document.getElementById('insightPro').checked ? mod + bonus_prof : mod; 
+			document.getElementById('survivalBar').value = document.getElementById('survivalPro').checked ? mod + bonus_prof : mod; 
+			document.getElementById('medicineBar').value = document.getElementById('medicinePro').checked ? mod + bonus_prof : mod; 
+		}
+		if(stat.value === "charisma")
+		{
+			mod = calcMod(document.getElementById("charismaBar").value);
+			document.getElementById("chaMod").innerHTML = mod;
+			document.getElementById('deceptionBar').value = document.getElementById('deceptionPro').checked ? mod + bonus_prof : mod; 
+			document.getElementById('performanceBar').value = document.getElementById('performancePro').checked ? mod + bonus_prof : mod; 
+			document.getElementById('intimidationBar').value = document.getElementById('intimidationPro').checked ? mod + bonus_prof : mod; 
+			document.getElementById('persuasionBar').value = document.getElementById('persuasionPro').checked ? mod + bonus_prof : mod; 
+		}
+	}
+	
+	function proficiency(prof){ <!--checks whether a proficiency box is checked and adds the bonus proficiency -->
+			var bonus_prof = calcProf(document.getElementById("level").value);
+			
+			if(prof.checked)
+			document.getElementById(prof.value).value = Number(document.getElementById(prof.value).value) + bonus_prof;
+			else
+			document.getElementById(prof.value).value = Number(document.getElementById(prof.value).value) - bonus_prof;
+	}
+	
+	function scoreDieRoll(){ <!-- special dice roller for base stats -->
+		var rolls = [];
+		for(var i = 0; i < 4; i++){
+			rolls.push(Math.floor(Math.random() * 5) + 2);
+		};
+		document.getElementById("scoreRollBar").innerHTML = "Rolls: " + rolls + " Total: " + scoreTotal(rolls);
+	}
+	
+	function scoreTotal(rolls){ <!-- total of the stat rolls, minus one lowest number -->
+		x = rolls.reduce(function(inx, val){
+			 if(val < inx) 
+				return val;
+			else
+				return inx;
+		});
+		return dieTotal(rolls) - x;
+	}
+	
+  function dieRolls(){ <!-- you know this one already -->
+  var num = document.getElementById('noOfDieBar').value;
+  var type = document.getElementById('typeOfDieBar').value;
+  var rolls = [];
+  for(var i = 0; i < num; i++){
+  rolls.push(Math.floor(Math.random() * type) + 1);
+  };
+  document.getElementById('resultP').innerHTML = rolls;
+  document.getElementById("totalP").innerHTML = dieTotal(rolls);
+}
+
+function dieTotal(rolls){
+		return rolls.reduce(function(acc, val){
+    return acc + val;
+  	});
+}
+
+ </script>
+  
+</body>
+</html>
