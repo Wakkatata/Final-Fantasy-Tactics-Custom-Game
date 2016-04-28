@@ -1,0 +1,22 @@
+Class Spell{
+  constructor(name, school, casttime, concentration, ritual, target, range, component, duration, description, effects)
+  {
+  this.name = name;
+  this.school = school;
+  this.casttime = casttime;
+  this.concentration = concentration;
+  this.ritual = ritual;
+  this.target = target;
+  this.range = range;
+  this.component = component;
+  this.duration = duration;
+  this.description = description;
+  this.effects = effects;
+  }
+}
+
+
+var spellListC = [new Spell("Blade Ward","Abjuration","1 action",false,false,"Self","Verbal, Somatic","1 round","You extend your hand and trace a sigil...","Weapon Damage")
+];
+
+spellList[0];
