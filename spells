@@ -1,7 +1,8 @@
 Class Spell{
-  constructor(name, school, casttime, concentration, ritual, target, range, component, duration, description, effects)
+  constructor(name, level, school, casttime, concentration, ritual, target, range, component, duration, description, effects)
   {
   this.name = name;
+  this.level = level
   this.school = school;
   this.casttime = casttime;
   this.concentration = concentration;
@@ -18,8 +19,8 @@ Class Spell{
 
 var spellListC = 
 [
-[name,school, casttime, concentration, ritual, target, range, component, duration, description, effects],
-["Blade Ward","Abjuration","1 action",false,false,"Self","Verbal, Somatic","1 round","You extend your hand and trace a sigil...","Weapon Damage"],
+[name,level,school, casttime, concentration, ritual, target, range, component, duration, description, effects],
+["Blade Ward","Cantrip","Abjuration","1 action",false,false,"Self","Verbal, Somatic","1 round","You extend your hand and trace a sigil...","Weapon Damage"],
 
 
 ];
