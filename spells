@@ -16,7 +16,12 @@ Class Spell{
 }
 
 
-var spellListC = [new Spell("Blade Ward","Abjuration","1 action",false,false,"Self","Verbal, Somatic","1 round","You extend your hand and trace a sigil...","Weapon Damage")
+var spellListC = 
+[
+[name,school, casttime, concentration, ritual, target, range, component, duration, description, effects],
+["Blade Ward","Abjuration","1 action",false,false,"Self","Verbal, Somatic","1 round","You extend your hand and trace a sigil...","Weapon Damage"],
+
+
 ];
 
 spellList[0];
